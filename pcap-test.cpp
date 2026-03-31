@@ -117,18 +117,18 @@ int main(int argc, char* argv[]) {
 		for(int i = 1; i < 6; i++)
 			printf(":%02X", eth->smac_[i]);
 		printf("\n");
-                printf("dst mac : %02X", eth->dmac_[0]);
-                for(int i = 1; i < 6; i++)
-                        printf(":%02X", eth->dmac_[i]);
-                printf("\n\n");
+		printf("dst mac : %02X", eth->dmac_[0]);
+		for(int i = 1; i < 6; i++)
+			printf(":%02X", eth->dmac_[i]);
+		printf("\n\n");
 
 		printf("*****IP Header*****\n");
 		printf("src ip : %s\n", inet_ntoa(sip));
 		printf("dst ip : %s\n\n", inet_ntoa(dip));
 		
-                printf("*****TCP Header*****\n");
-                printf("src port : %u\n", ntohs(tcp->sport_));
-                printf("dst port : %u\n\n", ntohs(tcp->dport_));
+		printf("*****TCP Header*****\n");
+		printf("src port : %u\n", ntohs(tcp->sport_));
+		printf("dst port : %u\n\n", ntohs(tcp->dport_));
 
 		printf("*****Payload*****\n");
 		for(int i = 0; i < std::min(8, payload_len); i++)
