@@ -40,6 +40,7 @@ typedef struct {
 	uint8_t v_hl_;
 	uint8_t tos_;
 	uint16_t tlen_;
+	uint16_t id_;
 	uint16_t frag_off_;
         uint8_t ttl_;
         uint8_t proto_;
@@ -49,15 +50,15 @@ typedef struct {
 } IpHdr;
 
 typedef struct {
-        uint8_t sport_;
-        uint8_t dport_;
-        uint16_t seq_;
-        uint16_t ack_;
+        uint16_t sport_;
+        uint16_t dport_;
+        uint32_t seq_;
+        uint32_t ack_;
         uint8_t offset_;
         uint8_t flags_;
         uint16_t window_;
-        uint32_t checksum_;
-        uint32_t urg_ptr_;
+        uint16_t checksum_;
+        uint16_t urg_ptr_;
 } TcpHdr;
 
 #pragma pack(pop)
@@ -114,9 +115,9 @@ int main(int argc, char* argv[]) {
 		printf("*****Ethernet Header*****\n");
 		printf("src mac : %02X", eth->smac_[0]);
 		for(int i = 1; i < 6; i++)
-			printf("%02X", eth->smac_[i]);
+			printf(":%02X", eth->smac_[i]);
 		printf("\n");
-                printf("dst mac : %02X", eth->smac_[0]);
+                printf("dst mac : %02X", eth->dmac_[0]);
                 for(int i = 1; i < 6; i++)
                         printf(":%02X", eth->dmac_[i]);
                 printf("\n\n");
@@ -131,8 +132,8 @@ int main(int argc, char* argv[]) {
 
 		printf("*****Payload*****\n");
 		for(int i = 0; i < std::min(8, payload_len); i++)
-			printf("%02X", payload[i]);
-		printf("\n");
+			printf("%02X ", payload[i]);
+		printf("\n\n\n");
 		
 	}
 
